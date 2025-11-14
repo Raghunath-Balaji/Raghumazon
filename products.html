@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Items - E-Commerce Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">E-Commerce Portal</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="products.html" class="active">Product Items</a>
+                <a href="about.html">About Us</a>
+                <a href="orders.html">Orders</a>
+                <a href="#" onclick="handleLogout()" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Product Items</h2>
+            <div class="product-grid">
+                <div class="product-card" onclick="expandProduct(0)">
+                    <img src="airpods.png" alt="Wireless Headphones">
+                    <h3>Wireless Headphones</h3>
+                    <p class="price">₹2,499</p>
+                    <p class="click-hint">Click to view details</p>
+                </div>
+                <div class="product-card" onclick="expandProduct(1)">
+                    <img src="watch.png" alt="Smart Watch">
+                    <h3>Smart Watch</h3>
+                    <p class="price">₹4,999</p>
+                    <p class="click-hint">Click to view details</p>
+                </div>
+                <div class="product-card" onclick="expandProduct(2)">
+                    <img src="laptop bag.png" alt="Laptop Bag">
+                    <h3>Laptop Bag</h3>
+                    <p class="price">₹1,299</p>
+                    <p class="click-hint">Click to view details</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProduct()">&times;</span>
+            <div id="productDetails"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const products = [
+            {
+                name: "Wireless Headphones",
+                price: "₹2,499",
+                image: "airpods.png",
+                description: "Premium wireless headphones with noise cancellation. Features 30-hour battery life, comfortable over-ear design, and crystal-clear audio quality. Perfect for music lovers and professionals.",
+                features: ["Noise Cancellation", "30-hour Battery", "Bluetooth 5.0", "Comfortable Design"]
+            },
+            {
+                name: "Smart Watch",
+                price: "₹4,999",
+                image: "watch.png",
+                description: "Advanced smartwatch with health tracking, fitness monitoring, and smartphone connectivity. Water-resistant design with a vibrant display and long-lasting battery.",
+                features: ["Health Tracking", "Fitness Monitoring", "Water Resistant", "5-day Battery"]
+            },
+            {
+                name: "Laptop Bag",
+                price: "₹1,299",
+                image: "laptop bag.png",
+                description: "Durable and stylish laptop bag with multiple compartments. Made from high-quality materials, perfect for carrying your laptop and accessories safely.",
+                features: ["Multiple Compartments", "Padded Protection", "Water Resistant", "Ergonomic Design"]
+            }
+        ];
+
+        function expandProduct(index) {
+            const product = products[index];
+            const modal = document.getElementById('productModal');
+            const details = document.getElementById('productDetails');
+            
+            details.innerHTML = `
+                <div class="product-detail-view">
+                    <div class="product-detail-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-detail-info">
+                        <h2>${product.name}</h2>
+                        <p class="product-detail-price">${product.price}</p>
+                        <p class="product-detail-description">${product.description}</p>
+                        <h4>Key Features:</h4>
+                        <ul class="product-features">
+                            ${product.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                        <button class="btn-primary" onclick="addToCart('${product.name}', '${product.price}')">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.display = "block";
+        }
+
+        function closeProduct() {
+            document.getElementById('productModal').style.display = "none";
+        }
+
+        function addToCart(name, price) {
+            alert(`${name} (${price}) added to cart!`);
+            closeProduct();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('productModal');
+            if (event.target == modal) {
+                closeProduct();
+            }
+        }
+        
+        // Check authentication
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+        };
+    </script>
+</body>
+</html>

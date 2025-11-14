@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - E-Commerce Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">E-Commerce Portal</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="products.html">Product Items</a>
+                <a href="about.html">About Us</a>
+                <a href="orders.html" class="active">Orders</a>
+                <a href="#" onclick="handleLogout()" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Your Orders</h2>
+            <ul class="item-list" id="ordersList">
+                <li>
+                    <h4>Order #ORD-001</h4>
+                    <p><strong>Product:</strong> Wireless Headphones</p>
+                    <p><strong>Price:</strong> ₹2,499</p>
+                    <p><strong>Date:</strong> 2024-01-15</p>
+                    <p><strong>Status:</strong> <span style="color: #27ae60;">Delivered</span></p>
+                </li>
+                <li>
+                    <h4>Order #ORD-002</h4>
+                    <p><strong>Product:</strong> Smart Watch</p>
+                    <p><strong>Price:</strong> ₹4,999</p>
+                    <p><strong>Date:</strong> 2024-01-20</p>
+                    <p><strong>Status:</strong> <span style="color: #f39c12;">Shipped</span></p>
+                </li>
+                <li>
+                    <h4>Order #ORD-003</h4>
+                    <p><strong>Product:</strong> Laptop Bag</p>
+                    <p><strong>Price:</strong> ₹1,299</p>
+                    <p><strong>Date:</strong> 2024-01-25</p>
+                    <p><strong>Status:</strong> <span style="color: #3498db;">Processing</span></p>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+        };
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - E-Commerce Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">E-Commerce Portal</h1>
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="products.html">Product Items</a>
+                <a href="about.html">About Us</a>
+                <a href="orders.html">Orders</a>
+                <a href="#" onclick="handleLogout()" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome-section">
+            <h2 id="welcomeMessage">Hello, Guest</h2>
+            <p>Welcome to our E-Commerce Portal</p>
+        </section>
+
+        <section class="features-section">
+            <div class="feature-card">
+                <h3>🛍️ Products</h3>
+                <p>Browse our wide range of products</p>
+                <a href="products.html" class="btn-secondary">View Products</a>
+            </div>
+            <div class="feature-card">
+                <h3>📦 Orders</h3>
+                <p>Track and manage your orders</p>
+                <a href="orders.html" class="btn-secondary">View Orders</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Display welcome message with username
+        window.onload = function() {
+            const username = localStorage.getItem('currentUser');
+            if (username) {
+                document.getElementById('welcomeMessage').textContent = `Hello, ${username}`;
+            } else {
+                // Redirect to login if not logged in
+                window.location.href = 'login.html';
+            }
+        };
+    </script>
+</body>
+</html>
