@@ -15,6 +15,10 @@
                 <a href="products.html" class="active">Product Items</a>
                 <a href="about.html">About Us</a>
                 <a href="orders.html">Orders</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="reviews.html">Reviews</a>
+                <a href="customer-care.html">Customer Care</a>
+                <a href="reporting.html">Reporting</a>
                 <a href="#" onclick="handleLogout()" class="logout-btn">Logout</a>
             </nav>
         </div>
@@ -99,6 +103,7 @@
                             ${product.features.map(feature => `<li>${feature}</li>`).join('')}
                         </ul>
                         <button class="btn-primary" onclick="addToCart('${product.name}', '${product.price}')">Add to Cart</button>
+                        <button class="btn-secondary" style="margin-top: 0.5rem; width: 100%;" onclick="addToWishlist('${product.name}')">Add to Wishlist</button>
                     </div>
                 </div>
             `;
@@ -113,6 +118,17 @@
         function addToCart(name, price) {
             alert(`${name} (${price}) added to cart!`);
             closeProduct();
+        }
+
+        function addToWishlist(productName) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            if (!wishlist.includes(productName)) {
+                wishlist.push(productName);
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                alert(`${productName} added to wishlist!`);
+            } else {
+                alert(`${productName} is already in your wishlist!`);
+            }
         }
 
         // Close modal when clicking outside

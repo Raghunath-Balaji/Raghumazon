@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments & Reviews - Raghumazon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Raghumazon</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="products.html">Product Items</a>
+                <a href="about.html">About Us</a>
+                <a href="orders.html">Orders</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="reviews.html" class="active">Reviews</a>
+                <a href="customer-care.html">Customer Care</a>
+                <a href="reporting.html">Reporting</a>
+                <a href="#" onclick="handleLogout()" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Product Reviews & Comments</h2>
+            
+            <div style="margin-bottom: 2rem;">
+                <h3>Recent Reviews</h3>
+                <ul class="item-list">
+                    <li>
+                        <h4>Wireless Headphones ⭐⭐⭐⭐⭐</h4>
+                        <p><strong>By:</strong> John Doe</p>
+                        <p>Excellent sound quality and comfortable to wear. Great value for money!</p>
+                        <p><small>Posted on: 2024-01-10</small></p>
+                    </li>
+                    <li>
+                        <h4>Smart Watch ⭐⭐⭐⭐</h4>
+                        <p><strong>By:</strong> Jane Smith</p>
+                        <p>Good features and battery life. The display could be brighter though.</p>
+                        <p><small>Posted on: 2024-01-12</small></p>
+                    </li>
+                    <li>
+                        <h4>Laptop Bag ⭐⭐⭐⭐⭐</h4>
+                        <p><strong>By:</strong> Mike Johnson</p>
+                        <p>Very durable and spacious. Perfect for my daily commute!</p>
+                        <p><small>Posted on: 2024-01-14</small></p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-container">
+                <h3>Write a Review</h3>
+                <form onsubmit="handleReviewSubmit(event)">
+                    <div class="form-group">
+                        <label for="reviewProduct">Product Name</label>
+                        <select id="reviewProduct" required>
+                            <option value="">Select a product</option>
+                            <option value="Wireless Headphones">Wireless Headphones</option>
+                            <option value="Smart Watch">Smart Watch</option>
+                            <option value="Laptop Bag">Laptop Bag</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewRating">Rating</label>
+                        <select id="reviewRating" required>
+                            <option value="">Select rating</option>
+                            <option value="5">⭐⭐⭐⭐⭐ (5 stars)</option>
+                            <option value="4">⭐⭐⭐⭐ (4 stars)</option>
+                            <option value="3">⭐⭐⭐ (3 stars)</option>
+                            <option value="2">⭐⭐ (2 stars)</option>
+                            <option value="1">⭐ (1 star)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">Your Review</label>
+                        <textarea id="reviewComment" required placeholder="Share your experience..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        function handleReviewSubmit(event) {
+            event.preventDefault();
+            const product = document.getElementById('reviewProduct').value;
+            const rating = document.getElementById('reviewRating').value;
+            const comment = document.getElementById('reviewComment').value;
+            
+            alert(`Thank you for your review of ${product}! Your feedback has been submitted.`);
+            event.target.reset();
+        }
+        
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+        };
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist - Raghumazon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Raghumazon</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="products.html">Product Items</a>
+                <a href="about.html">About Us</a>
+                <a href="orders.html">Orders</a>
+                <a href="wishlist.html" class="active">Wishlist</a>
+                <a href="reviews.html">Reviews</a>
+                <a href="customer-care.html">Customer Care</a>
+                <a href="reporting.html">Reporting</a>
+                <a href="#" onclick="handleLogout()" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Your Wishlist</h2>
+            <ul class="item-list" id="wishlistItems">
+                <li>
+                    <h4>Wireless Headphones</h4>
+                    <p><strong>Price:</strong> ₹2,499</p>
+                    <button class="btn-secondary" style="margin-top: 0.5rem;" onclick="removeFromWishlist('Wireless Headphones')">Remove</button>
+                </li>
+            </ul>
+            <p id="emptyWishlist" style="display: none; text-align: center; color: #666; padding: 2rem;">Your wishlist is empty. <a href="products.html">Browse products</a> to add items.</p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        function removeFromWishlist(productName) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            wishlist = wishlist.filter(item => item !== productName);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            loadWishlist();
+        }
+        
+        function loadWishlist() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            const wishlistItems = document.getElementById('wishlistItems');
+            const emptyWishlist = document.getElementById('emptyWishlist');
+            
+            if (wishlist.length === 0) {
+                wishlistItems.innerHTML = '';
+                emptyWishlist.style.display = 'block';
+            } else {
+                emptyWishlist.style.display = 'none';
+                wishlistItems.innerHTML = wishlist.map(item => `
+                    <li>
+                        <h4>${item}</h4>
+                        <button class="btn-secondary" style="margin-top: 0.5rem;" onclick="removeFromWishlist('${item}')">Remove</button>
+                    </li>
+                `).join('');
+            }
+        }
+        
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+            loadWishlist();
+        };
+    </script>
+</body>
+</html>
+

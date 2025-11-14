@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporting - Raghumazon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Raghumazon</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="products.html">Product Items</a>
+                <a href="about.html">About Us</a>
+                <a href="orders.html">Orders</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="reviews.html">Reviews</a>
+                <a href="customer-care.html">Customer Care</a>
+                <a href="reporting.html" class="active">Reporting</a>
+                <a href="#" onclick="handleLogout()" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Reporting Options</h2>
+            <p>Report issues, provide feedback, or submit complaints using the options below.</p>
+            
+            <div style="margin-top: 2rem;">
+                <h3>Report Types</h3>
+                <ul class="item-list">
+                    <li>
+                        <h4>Product Issue</h4>
+                        <p>Report problems with product quality, description, or images</p>
+                    </li>
+                    <li>
+                        <h4>Delivery Issue</h4>
+                        <p>Report problems with order delivery, packaging, or damaged items</p>
+                    </li>
+                    <li>
+                        <h4>Payment Issue</h4>
+                        <p>Report problems with payments, refunds, or billing</p>
+                    </li>
+                    <li>
+                        <h4>Account Issue</h4>
+                        <p>Report problems with your account, security, or access</p>
+                    </li>
+                    <li>
+                        <h4>General Feedback</h4>
+                        <p>Share your suggestions and feedback to help us improve</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-container" style="margin-top: 2rem;">
+                <h3>Submit a Report</h3>
+                <form onsubmit="handleReportSubmit(event)">
+                    <div class="form-group">
+                        <label for="reportType">Report Type</label>
+                        <select id="reportType" required>
+                            <option value="">Select report type</option>
+                            <option value="product">Product Issue</option>
+                            <option value="delivery">Delivery Issue</option>
+                            <option value="payment">Payment Issue</option>
+                            <option value="account">Account Issue</option>
+                            <option value="feedback">General Feedback</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportOrderId">Order ID (if applicable)</label>
+                        <input type="text" id="reportOrderId" placeholder="e.g., ORD-001 (optional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="reportTitle">Title</label>
+                        <input type="text" id="reportTitle" required placeholder="Brief title of your report">
+                    </div>
+                    <div class="form-group">
+                        <label for="reportDescription">Description</label>
+                        <textarea id="reportDescription" required placeholder="Please provide detailed information about the issue..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportPriority">Priority</label>
+                        <select id="reportPriority" required>
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                            <option value="urgent">Urgent</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Report</button>
+                </form>
+            </div>
+
+            <div style="margin-top: 2rem; background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+                <h3>Your Recent Reports</h3>
+                <ul class="item-list">
+                    <li>
+                        <h4>Report #RPT-001 - Product Issue</h4>
+                        <p><strong>Status:</strong> <span style="color: #3498db;">Under Review</span></p>
+                        <p><strong>Submitted:</strong> 2024-01-20</p>
+                    </li>
+                    <li>
+                        <h4>Report #RPT-002 - Delivery Issue</h4>
+                        <p><strong>Status:</strong> <span style="color: #27ae60;">Resolved</span></p>
+                        <p><strong>Submitted:</strong> 2024-01-15</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        function handleReportSubmit(event) {
+            event.preventDefault();
+            const reportType = document.getElementById('reportType').value;
+            const title = document.getElementById('reportTitle').value;
+            const priority = document.getElementById('reportPriority').value;
+            
+            alert(`Report submitted successfully!\n\nReport ID: #RPT-${Date.now()}\nType: ${reportType}\nPriority: ${priority}\n\nWe'll review your report and get back to you soon.`);
+            event.target.reset();
+        }
+        
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+        };
+    </script>
+</body>
+</html>
+

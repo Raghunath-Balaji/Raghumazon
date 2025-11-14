@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Care - Raghumazon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="logo">Raghumazon</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="products.html">Product Items</a>
+                <a href="about.html">About Us</a>
+                <a href="orders.html">Orders</a>
+                <a href="wishlist.html">Wishlist</a>
+                <a href="reviews.html">Reviews</a>
+                <a href="customer-care.html" class="active">Customer Care</a>
+                <a href="reporting.html">Reporting</a>
+                <a href="#" onclick="handleLogout()" class="logout-btn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>Customer Care</h2>
+            <p>We're here to help! Choose from the options below or contact us directly.</p>
+            
+            <div style="margin-top: 2rem;">
+                <h3>Frequently Asked Questions</h3>
+                <ul class="item-list">
+                    <li>
+                        <h4>How do I track my order?</h4>
+                        <p>You can track your order by visiting the Orders page. You'll receive a tracking number via email once your order is shipped.</p>
+                    </li>
+                    <li>
+                        <h4>What is your return policy?</h4>
+                        <p>We offer a 30-day return policy on all products. Items must be in original condition with tags attached.</p>
+                    </li>
+                    <li>
+                        <h4>How can I cancel my order?</h4>
+                        <p>You can cancel your order within 24 hours of placing it. Visit the Orders page and click on "Cancel Order".</p>
+                    </li>
+                    <li>
+                        <h4>What payment methods do you accept?</h4>
+                        <p>We accept all major credit/debit cards, UPI, net banking, and cash on delivery.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="form-container" style="margin-top: 2rem;">
+                <h3>Submit a Support Ticket</h3>
+                <form onsubmit="handleSupportTicket(event)">
+                    <div class="form-group">
+                        <label for="ticketSubject">Subject</label>
+                        <input type="text" id="ticketSubject" required placeholder="Brief description of your issue">
+                    </div>
+                    <div class="form-group">
+                        <label for="ticketCategory">Category</label>
+                        <select id="ticketCategory" required>
+                            <option value="">Select category</option>
+                            <option value="order">Order Related</option>
+                            <option value="payment">Payment Issue</option>
+                            <option value="product">Product Inquiry</option>
+                            <option value="return">Return/Refund</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ticketDescription">Description</label>
+                        <textarea id="ticketDescription" required placeholder="Please provide details about your issue..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Ticket</button>
+                </form>
+            </div>
+
+            <div style="margin-top: 2rem; background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+                <h3>Contact Support</h3>
+                <p><strong>Email:</strong> support@raghumazon.com</p>
+                <p><strong>Phone:</strong> +91 1800-123-4567</p>
+                <p><strong>Hours:</strong> Monday - Friday, 9 AM - 6 PM IST</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        function handleSupportTicket(event) {
+            event.preventDefault();
+            const subject = document.getElementById('ticketSubject').value;
+            const category = document.getElementById('ticketCategory').value;
+            
+            alert(`Support ticket submitted successfully! Ticket ID: #TKT-${Date.now()}\n\nWe'll get back to you within 24 hours.`);
+            event.target.reset();
+        }
+        
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+            }
+        };
+    </script>
+</body>
+</html>
+
